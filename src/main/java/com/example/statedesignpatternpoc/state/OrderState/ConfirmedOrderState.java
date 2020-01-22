@@ -1,5 +1,6 @@
 package com.example.statedesignpatternpoc.state.OrderState;
 
+import com.example.statedesignpatternpoc.constant.OrderStateConstant;
 import com.example.statedesignpatternpoc.context.OrderStateContext;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,6 +12,11 @@ public class ConfirmedOrderState implements OrderState {
 
   public static OrderState getInstance() {
     return singleton;
+  }
+
+  @Override
+  public OrderStateConstant getOrderStateConstant() {
+    return OrderStateConstant.CONFIRMED;
   }
 
   @Override

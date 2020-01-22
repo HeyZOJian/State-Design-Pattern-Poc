@@ -18,6 +18,7 @@ public class OrderStateContext{
   public void changeState(OrderState state) {
     log.warn("状态更新:从 " + this.state + " 状态变为了 " + state + " 状态。");
     this.state = state;
+    order.setOrderState(state.getOrderStateConstant());
   }
 
   public void createOrder() {
