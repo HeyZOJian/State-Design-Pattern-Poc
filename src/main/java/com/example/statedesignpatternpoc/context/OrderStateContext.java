@@ -21,15 +21,11 @@ public class OrderStateContext{
     order.setOrderState(state.getOrderStateConstant());
   }
 
-  public void createOrder() {
-    this.state.createOrder(this, order.isHasTrailerService());
-  }
-
-  public void reviewTrailerService() {
+  public void reviewTrailerService() throws Exception {
     this.state.reviewTrailer(this);
   }
 
-  public void overduePayment() {
+  public void overduePayment() throws Exception {
     this.state.overduePayment(this);
   }
 }

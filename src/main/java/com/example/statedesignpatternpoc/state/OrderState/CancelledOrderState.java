@@ -19,19 +19,17 @@ public class CancelledOrderState implements OrderState {
     return OrderStateConstant.CANCELLED;
   }
 
+
   @Override
-  public void createOrder(OrderStateContext orderContext, boolean hasTrailerService) {
+  public void reviewTrailer(OrderStateContext orderContext) throws Exception {
     log.error("操作错误，订单状态为已取消");
+    throw new Exception("操作错误，订单状态为已取消");
   }
 
   @Override
-  public void reviewTrailer(OrderStateContext orderContext) {
+  public void overduePayment(OrderStateContext orderContext) throws Exception {
     log.error("操作错误，订单状态为已取消");
-  }
-
-  @Override
-  public void overduePayment(OrderStateContext orderContext) {
-    log.error("操作错误，订单状态为已取消");
+    throw new Exception("操作错误，订单状态为已取消");
   }
 
   @Override

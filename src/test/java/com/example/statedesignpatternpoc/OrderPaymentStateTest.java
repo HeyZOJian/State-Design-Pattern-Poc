@@ -1,9 +1,9 @@
 package com.example.statedesignpatternpoc;
 
 import com.example.statedesignpatternpoc.constant.OrderPaymentStateConstant;
-import com.example.statedesignpatternpoc.constant.OrderStateConstant;
 import com.example.statedesignpatternpoc.context.OrderPaymentStateContext;
 import com.example.statedesignpatternpoc.entity.Order;
+import com.example.statedesignpatternpoc.service.OrderService;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +14,11 @@ import org.junit.jupiter.api.Test;
 public class OrderPaymentStateTest {
   private Order order;
   private OrderPaymentStateContext paymentStateContext;
+  OrderService orderService = new OrderService();
 
   @BeforeEach
   public void setUp() throws Exception {
-    order = new Order();
-    order.setOrderState(OrderStateConstant.CONFIRMED);
-    order.setPaymentState(OrderPaymentStateConstant.UNPAID);
-    order.setTotalAmount(BigDecimal.valueOf(10));
+    order = orderService.createOrder(false);
     paymentStateContext = new OrderPaymentStateContext(order);
   }
 
@@ -36,10 +34,9 @@ public class OrderPaymentStateTest {
     Assertions.assertEquals(order.getPaymentState(), OrderPaymentStateConstant.PARTIAL_PAID);
   }
 
-    @Test
-    public void testRefund() {
-        paymentStateContext.refund(BigDecimal.valueOf(1));
-        Assertions.assertEquals(order.getPaymentState(), OrderPaymentStateConstant.UNPAID);
-    }
-
+  @Test
+  public void testRefund() {
+    paymentStateContext.refund(BigDecimal.valueOf(1));
+    Assertions.assertEquals(order.getPaymentState(), OrderPaymentStateConstant.UNPAID);
+  }
 }

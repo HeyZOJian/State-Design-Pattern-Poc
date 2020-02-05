@@ -20,18 +20,14 @@ public class ConfirmedOrderState implements OrderState {
   }
 
   @Override
-  public void createOrder(OrderStateContext orderContext, boolean hasTrailerService) {
+  public void reviewTrailer(OrderStateContext orderContext) throws Exception {
     log.error("操作错误，订单状态为已确认");
-  }
-
-  @Override
-  public void reviewTrailer(OrderStateContext orderContext) {
-    log.error("操作错误，订单状态为已确认");
+    throw new Exception("操作错误，订单状态为已确认");
   }
 
   @Override
   public void overduePayment(OrderStateContext context) {
-    log.info("超时未支付");
+    log.info("超时未支付...");
     context.changeState(CancelledOrderState.getInstance());
   }
 

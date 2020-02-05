@@ -24,6 +24,7 @@ public class OrderPaymentStateContext {
   }
 
   public void pay(BigDecimal amount) {
+    // 依赖订单状态
     if (order.getOrderState().equals(OrderStateConstant.CONFIRMED)) {
       this.state.pay(this, amount, order);
     } else {
@@ -32,6 +33,7 @@ public class OrderPaymentStateContext {
   }
 
   public void refund(BigDecimal amount) {
+    // 依赖订单状态
     if (order.getOrderState().equals(OrderStateConstant.CONFIRMED)) {
       this.state.refund(this, amount, order);
     } else {

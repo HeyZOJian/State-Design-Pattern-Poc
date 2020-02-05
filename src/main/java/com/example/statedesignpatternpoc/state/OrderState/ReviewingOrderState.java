@@ -20,25 +20,14 @@ public class ReviewingOrderState implements OrderState {
   }
 
   @Override
-  public void createOrder(OrderStateContext context, boolean hasTrailerService) {
-    if (!hasTrailerService) {
-      log.info("订单没有包含拖车服务");
-      context.changeState(ConfirmedOrderState.getInstance());
-    } else {
-      log.info("订单包含拖车服务");
-      context.changeState(ReviewingOrderState.getInstance());
-    }
-  }
-
-  @Override
   public void reviewTrailer(OrderStateContext context) {
-    log.info("拖车审核成功");
+    log.info("执行拖车审核的逻辑...拖车审核成功");
     context.changeState(ConfirmedOrderState.getInstance());
   }
 
   @Override
   public void overduePayment(OrderStateContext context) {
-    log.info("超时未支付");
+    log.info("超时未支付...");
     context.changeState(CancelledOrderState.getInstance());
   }
 
